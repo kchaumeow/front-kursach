@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardBody, CardFooter, CardHeader,Heading, Input, Stack, StackDivider,Text, useToast } from "@chakra-ui/react";
+import { Box, Button, Card, CardBody, CardFooter, CardHeader,Heading, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, StackDivider,Text, useToast } from "@chakra-ui/react";
 import { Movie } from "../components/MovieCard";
 import { useEffect, useState } from "react";
 import movieApi from "../api";
@@ -78,13 +78,13 @@ export default function MovieCreate(){
                 <Heading size='xs' textTransform='uppercase'>
                     Рейтинг
                 </Heading>
-                <Input
-                    value={updatedMovie.rating.toString()}
-                    onChange={(e) => setMovie((prev) => ({ ...prev, rating: +e.target.value }))}
-                    type="number"
-                    min={0}
-                    isRequired
-                />
+                <NumberInput value={updatedMovie.rating} precision={1} step={0.2} onChange={(e) => setMovie((prev) => ({ ...prev, rating: +e }))}>
+                <NumberInputField/>
+                <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                </NumberInputStepper>
+                </NumberInput>
             </Box>
             <Box>
                 <Heading size='xs' textTransform='uppercase'>

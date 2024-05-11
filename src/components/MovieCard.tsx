@@ -74,7 +74,7 @@ export default function MovieCard({movie, reload}: {movie: Movie, reload: Functi
           })
 
         }}>Удалить</Button>
-        <Link to={`/movies/${movie.id}`}>
+        <Link to={`/movies/update/${movie.id}`}>
           <Button colorScheme="yellow">Обновить данные</Button>
         </Link>
         </Box>
