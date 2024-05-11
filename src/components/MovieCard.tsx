@@ -1,4 +1,6 @@
-import {Box, Card, CardBody, CardHeader, Heading, Stack, StackDivider, Text} from "@chakra-ui/react";
+import {Box, Button, Card, CardBody, CardFooter, CardHeader, Heading, Stack, StackDivider, Text, useToast} from "@chakra-ui/react";
+import movieApi from "../api";
+import { Link } from "react-router-dom";
 
 export type Movie = {
   id: number;
@@ -11,18 +13,19 @@ export type Movie = {
   rating: number;
 }
 
-export default function MovieCard({movie}: {movie: Movie}){
+export default function MovieCard({movie, reload}: {movie: Movie, reload: Function}){
+  const toast = useToast();
   return (
-    <Card>
+    <Card variant="filled" m={5} w="1200px">
       <CardHeader>
-        <Heading size='md'>{movie.name}</Heading>
+        <Heading size='lg'>{movie.name}</Heading>
       </CardHeader>
       
       <CardBody>
         <Stack divider={<StackDivider />} spacing='4'>
           <Box>
             <Heading size='xs' textTransform='uppercase'>
-              Описание:
+              Описание
             </Heading>
             <Text pt='2' fontSize='sm'>
               {movie.description}
@@ -44,8 +47,38 @@ export default function MovieCard({movie}: {movie: Movie}){
               {movie.rating}
             </Text>
           </Box>
+          <Box>
+            <Heading size='xs' textTransform='uppercase'>
+            Жанр
+            </Heading>
+            <Text pt='2' fontSize='sm'>
+              {movie.genre}
+            </Text>
+          </Box>
         </Stack>
       </CardBody>
+      <CardFooter>
+        <Box display="flex" gap={5}>
+        <Button colorScheme="red" onClick={()=> {
+          movieApi.deleteMovie(movie.id).then(()=> {
+            reload();
+          }).catch((error)=> {
+            toast({
+              title: error.title,
+              description: error.data,
+              status: 'error',
+              duration: 5000,
+              isClosable: true,
+              position: "top-right"
+            })
+          })
+
+        }}>Удалить</Button>
+        <Link to={`/movies/${movie.id}`}>
+          <Button colorScheme="yellow">Обновить данные</Button>
+        </Link>
+        </Box>
+      </CardFooter>
     </Card>
   )
 }
