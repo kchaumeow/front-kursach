@@ -1,8 +1,7 @@
 import { Box, Button, Card, CardBody, CardFooter, CardHeader,Heading, Input, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Stack, StackDivider,Text, useToast } from "@chakra-ui/react";
 import { Movie } from "../components/MovieCard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import movieApi from "../api";
-import { useParams } from "react-router-dom";
 
 export default function MovieCreate(){
     const [updatedMovie, setMovie] = useState<Movie>({name: "", description: "", id: 0, release_year: 0, rating: 0, kinopoisk_id: 0, genre: "", link: "http://localhost:5173/movies/create"});
