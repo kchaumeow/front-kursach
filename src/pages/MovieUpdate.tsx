@@ -20,7 +20,7 @@ import {
 import { Movie } from "../components/MovieCard";
 import { useEffect, useState } from "react";
 import movieApi from "../api";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function MovieUpdate() {
   const [isLoading, setLoading] = useState(false);
@@ -50,6 +50,7 @@ export default function MovieUpdate() {
   if (isLoading) return <Text>Загрузка...</Text>;
   return (
     <Card variant="elevated" m={10}>
+      <Link to="/">Назад</Link>
       <form
         onSubmit={(e) => {
           e.preventDefault();
