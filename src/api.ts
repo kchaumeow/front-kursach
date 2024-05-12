@@ -1,5 +1,5 @@
 import axios from "axios";
-import {Movie} from "./components/MovieCard.tsx";
+import { Movie } from "./components/MovieCard.tsx";
 interface CreateMovie {
   id?: number;
   name: string;
@@ -22,7 +22,7 @@ interface UpdateMovie {
 }
 const httpClient = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL,
-})
+});
 class MovieApi {
   async getMovies() {
     return httpClient.get<Movie[]>("/movies/");
@@ -33,11 +33,11 @@ class MovieApi {
   async createMovie(movie: CreateMovie) {
     return httpClient.post("/movies/", movie);
   }
-  
+
   async updateMovie(id: number, movie: UpdateMovie) {
     return httpClient.put(`/movies/${id}/`, movie);
   }
-  
+
   async deleteMovie(id: number) {
     return httpClient.delete(`/movies/${id}/`);
   }
