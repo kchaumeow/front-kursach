@@ -38,7 +38,7 @@ export default function MovieUpdate() {
   useEffect(() => {
     setLoading(true);
     movieApi
-      .getMovieByKinoposikId(+id!)
+      .getMovieById(+id!)
       .then((response) => {
         console.log(response.data);
         setMovie(response.data);

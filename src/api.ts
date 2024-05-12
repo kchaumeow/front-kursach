@@ -28,7 +28,10 @@ class MovieApi {
     return httpClient.get<Movie[]>("/movies/");
   }
   async getMovieByKinoposikId(kinopoisk_id: number) {
-    return httpClient.get<Movie>(`/movies/${kinopoisk_id}/`);
+    return httpClient.get<Movie>(`/movies/parse/${kinopoisk_id}/`);
+  }
+  async getMovieById(id: number) {
+    return httpClient.get<Movie>(`/movies/${id}/`);
   }
   async createMovie(movie: CreateMovie) {
     return httpClient.post("/movies/", movie);
